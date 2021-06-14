@@ -1,11 +1,14 @@
 package com.changgou.system.service;
 
-import com.changgou.pojo.LoginLog;
+
+import com.changgou.system.pojo.LoginLog;
 import com.github.pagehelper.Page;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public interface LoginLogService {
 
     /***

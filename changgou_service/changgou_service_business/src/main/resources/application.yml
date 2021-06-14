@@ -1,11 +1,17 @@
 server:
   port: 9004
 spring:
+  rabbitmq:
+    host: 121.5.159.207
+    port: 5672
+    virtual-host: Vhost
+    username: admin
+    password: admin
   application:
     name: business
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.200.128:3306/changgou_business?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://akokko.com:3306/changgou_business?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
     username: root
     password: root
   main:

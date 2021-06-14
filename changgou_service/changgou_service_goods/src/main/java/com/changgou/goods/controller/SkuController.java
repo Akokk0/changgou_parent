@@ -7,8 +7,11 @@ import com.changgou.goods.pojo.Sku;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/sku")
@@ -97,10 +100,22 @@ public class SkuController {
      * @return
      */
     @GetMapping(value = "/search/{page}/{size}" )
-    public Result findPage(@RequestParam Map searchMap, @PathVariable  int page, @PathVariable  int size){
+    public Result findPage(@RequestParam Map searchMap, @PathVariable int page, @PathVariable int size){
         Page<Sku> pageList = skuService.findPage(searchMap, page, size);
         PageResult pageResult=new PageResult(pageList.getTotal(),pageList.getResult());
         return new Result(true,StatusCode.OK,"查询成功",pageResult);
+    }
+
+    @GetMapping("/spu/{spuId}")
+    public List<Sku> findSkuListBySpuId(@PathVariable("spuId") String spuId) {
+        Map<String, Object> searchMap = new HashMap<>();
+        if (!"all".equals(spuId)) {
+            searchMap.put("spuId", spuId);
+        }
+        searchMap.put("status", "1");
+        List<Sku> skuList = skuService.findList(searchMap);
+
+        return skuList;
     }
 
 

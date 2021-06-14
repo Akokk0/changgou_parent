@@ -1,11 +1,12 @@
 package com.changgou.system.service.impl;
 
 import com.changgou.system.dao.AdminMapper;
+import com.changgou.system.pojo.Admin;
 import com.changgou.system.service.AdminService;
-import com.changgou.pojo.Admin;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -44,6 +45,8 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public void add(Admin admin){
+        String lockPassword = BCrypt.hashpw(admin.getPassword(), BCrypt.gensalt());
+        admin.setPassword(lockPassword);
         adminMapper.insert(admin);
     }
 
@@ -102,6 +105,23 @@ public class AdminServiceImpl implements AdminService {
         PageHelper.startPage(page,size);
         Example example = createExample(searchMap);
         return (Page<Admin>)adminMapper.selectByExample(example);
+    }
+
+    /***
+     * 登录
+     * @param admin
+     * @return
+     */
+    @Override
+    public boolean login(Admin admin) {
+        Admin adminInfo = new Admin();
+        adminInfo.setLoginName(admin.getLoginName());
+        Admin realAdmin = adminMapper.selectOne(adminInfo);
+        if (realAdmin == null) {
+            return false;
+        } else {
+            return BCrypt.checkpw(admin.getPassword(), realAdmin.getPassword());
+        }
     }
 
     /**
