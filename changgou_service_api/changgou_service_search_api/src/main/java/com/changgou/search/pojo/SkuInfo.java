@@ -187,4 +187,25 @@ public class SkuInfo implements Serializable {
     public void setSpecMap(Map<String, Object> specMap) {
         this.specMap = specMap;
     }
+
+    @Override
+    public String toString() {
+        return "SkuInfo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", num=" + num +
+                ", image='" + image + '\'' +
+                ", status='" + status + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", isDefault='" + isDefault + '\'' +
+                ", spuId=" + spuId +
+                ", categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
+                ", brandName='" + brandName + '\'' +
+                ", spec='" + spec + '\'' +
+                ", specMap=" + specMap +
+                '}';
+    }
 }

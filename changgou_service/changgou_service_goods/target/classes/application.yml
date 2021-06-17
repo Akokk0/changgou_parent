@@ -8,6 +8,14 @@ spring:
     url: jdbc:mysql://akokko.com:3306/changgou_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
     username: root
     password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      min-idle: 5         #数据库连接池的最小维持连接数
+      initial-size: 5     #初始化提供的连接数
+      max-total: 5          #最大的连接数
+      max-wait-millis: 200        #等待连接获取的最大超时时间
+      remove-abandoned-timeout: 300
+
   main:
     allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
 eureka:

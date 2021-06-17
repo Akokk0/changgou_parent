@@ -1,4 +1,5 @@
 package com.changgou.goods.controller;
+
 import com.changgou.entity.PageResult;
 import com.changgou.entity.Result;
 import com.changgou.entity.StatusCode;
@@ -114,9 +115,8 @@ public class SkuController {
         }
         searchMap.put("status", "1");
         List<Sku> skuList = skuService.findList(searchMap);
+        System.out.println(skuList);
 
         return skuList;
     }
-
-
 }

@@ -8,4 +8,6 @@ public interface ESManagerService {
 
     void importDataBySpuId(String spuId);
 
+    void delDataBySpuId(String spuId);
+
 }

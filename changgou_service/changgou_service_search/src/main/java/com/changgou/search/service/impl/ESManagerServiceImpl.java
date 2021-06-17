@@ -70,4 +70,15 @@ public class ESManagerServiceImpl implements ESManagerService {
         //导入索引库
         esManagerMapper.saveAll(skuInfoList);
     }
+
+    @Override
+    public void delDataBySpuId(String spuId) {
+        List<Sku> skuList = skuFeign.findSkuListBySpuId(spuId);
+        if (skuList == null || skuList.size() <= 0) {
+            throw new RuntimeException("当前没有查询到数据，无法从索引库删除");
+        }
+        for (Sku sku : skuList) {
+            esManagerMapper.deleteById(Long.parseLong(sku.getId()));
+        }
+    }
 }

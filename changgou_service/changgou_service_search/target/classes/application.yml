@@ -14,7 +14,7 @@ spring:
     allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
   data:
     elasticsearch:
-      cluster-name: elasticsearch
+      cluster-name: docker-cluster
       cluster-nodes: 121.5.159.207:9300
   thymeleaf:
     cache: false

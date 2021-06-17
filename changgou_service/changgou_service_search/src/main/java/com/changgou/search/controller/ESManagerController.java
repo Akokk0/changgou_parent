@@ -6,12 +6,11 @@ import com.changgou.entity.StatusCode;
 import com.changgou.search.service.ESManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/manage")
+@RequestMapping("/manager")
 public class ESManagerController {
 
     @Autowired
@@ -23,9 +22,9 @@ public class ESManagerController {
         return new Result(true, StatusCode.OK, "创建索引库结构成功！");
     }
 
-    @GetMapping("/import/{id}")
-    public Result importAll(@PathVariable("id") String id) {
-        esManagerService.importDataBySpuId(id);
+    @GetMapping("/importAll")
+    public Result importAll() {
+        esManagerService.importAll();
         return new Result(true, StatusCode.OK, "导入全部数据成功！");
     }
 }
